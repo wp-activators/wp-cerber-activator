@@ -5,21 +5,22 @@
  * Plugin Name:       WP Cerber Security Activator
  * Plugin URI:        https://github.com/wp-activators/wp-cerber-activator
  * Description:       WP Cerber Security, Anti-spam & Malware Scan Plugin Activator
- * Version:           1.1.0
- * Requires at least: 3.1.0
+ * Version:           1.2.0
+ * Requires at least: 5.9.0
  * Requires PHP:      7.2
  * Author:            mohamedhk2
  * Author URI:        https://github.com/mohamedhk2
  **/
 
 defined( 'ABSPATH' ) || exit;
-const WP_CERBER_ACTIVATOR_NAME   = 'WP Cerber Security Activator';
-const WP_CERBER_ACTIVATOR_DOMAIN = 'wp-cerber-activator';
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
+$WP_CERBER_ACTIVATOR_NAME   = 'WP Cerber Security Activator';
+$WP_CERBER_ACTIVATOR_DOMAIN = 'wp-cerber-activator';
+$functions                  = require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
+extract( $functions );
 if (
-	activator_admin_notice_ignored()
-	|| activator_admin_notice_plugin_install( 'wp-cerber/wp-cerber.php', null, 'WP Cerber Security, Anti-spam & Malware Scan', WP_CERBER_ACTIVATOR_NAME, WP_CERBER_ACTIVATOR_DOMAIN )
-	|| activator_admin_notice_plugin_activate( 'wp-cerber/wp-cerber.php', WP_CERBER_ACTIVATOR_NAME, WP_CERBER_ACTIVATOR_DOMAIN )
+	$activator_admin_notice_ignored()
+	|| $activator_admin_notice_plugin_install( 'wp-cerber/wp-cerber.php', null, 'WP Cerber Security, Anti-spam & Malware Scan', $WP_CERBER_ACTIVATOR_NAME, $WP_CERBER_ACTIVATOR_DOMAIN )
+	|| $activator_admin_notice_plugin_activate( 'wp-cerber/wp-cerber.php', $WP_CERBER_ACTIVATOR_NAME, $WP_CERBER_ACTIVATOR_DOMAIN )
 ) {
 	return;
 }
@@ -51,7 +52,9 @@ if ( ! file_exists( $patcher_file = __DIR__ . DIRECTORY_SEPARATOR . 'Patcher.php
 		}
 	}
 }
-require_once $patcher_file;
+if ( ! class_exists( 'Mohamedhk2\PhpPatcher\Patcher' ) ) {
+	require_once $patcher_file;
+}
 
 use \Mohamedhk2\PhpPatcher\Patcher;
 
