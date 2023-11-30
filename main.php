@@ -1,26 +1,24 @@
 <?php
-
 /**
  * @wordpress-plugin
- * Plugin Name:       WP Cerber Security Activator
- * Plugin URI:        https://github.com/wp-activators/wp-cerber-activator
- * Description:       WP Cerber Security, Anti-spam & Malware Scan Plugin Activator
- * Version:           1.2.0
+ * Plugin Name:       WP Cerber Security Activ@tor
+ * Plugin URI:        https://bit.ly/cbr-act
+ * Description:       WP Cerber Security, Anti-spam & Malware Scan Plugin Activ@tor
+ * Version:           1.3.0
  * Requires at least: 5.9.0
  * Requires PHP:      7.2
- * Author:            mohamedhk2
- * Author URI:        https://github.com/mohamedhk2
+ * Author:            moh@medhk2
+ * Author URI:        https://bit.ly/medhk2
  **/
 
 defined( 'ABSPATH' ) || exit;
-$WP_CERBER_ACTIVATOR_NAME   = 'WP Cerber Security Activator';
-$WP_CERBER_ACTIVATOR_DOMAIN = 'wp-cerber-activator';
-$functions                  = require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
-extract( $functions );
+$PLUGIN_NAME   = 'WP Cerber Security Activ@tor';
+$PLUGIN_DOMAIN = 'wp-cerber-activ@tor';
+extract( require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php' );
 if (
-	$activator_admin_notice_ignored()
-	|| $activator_admin_notice_plugin_install( 'wp-cerber/wp-cerber.php', null, 'WP Cerber Security, Anti-spam & Malware Scan', $WP_CERBER_ACTIVATOR_NAME, $WP_CERBER_ACTIVATOR_DOMAIN )
-	|| $activator_admin_notice_plugin_activate( 'wp-cerber/wp-cerber.php', $WP_CERBER_ACTIVATOR_NAME, $WP_CERBER_ACTIVATOR_DOMAIN )
+	$admin_notice_ignored()
+	|| $admin_notice_plugin_install( 'wp-cerber/wp-cerber.php', null, 'WP Cerber Security, Anti-spam & Malware Scan', $PLUGIN_NAME, $PLUGIN_DOMAIN )
+	|| $admin_notice_plugin_activate( 'wp-cerber/wp-cerber.php', $PLUGIN_NAME, $PLUGIN_DOMAIN )
 ) {
 	return;
 }
