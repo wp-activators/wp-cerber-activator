@@ -31,23 +31,9 @@ add_action( 'plugins_loaded', function () {
 } );
 
 if ( ! file_exists( $patcher_file = __DIR__ . DIRECTORY_SEPARATOR . 'Patcher.php' ) ) {
-	$patcher = file_get_contents( $githubusercontent = 'https://raw.githubusercontent.com/mohamedhk2/php-patcher/v1.0.6/src/Patcher.php' );
-	if ( $patcher ) {
-		put_content:
-		$put_contents = file_put_contents( $patcher_file, $patcher );
-		if ( $put_contents === false ) {
-			unlink( $patcher_file );
-
-			return;
-		}
-	} else {
-		$res = wp_remote_get( $githubusercontent );
-		if ( ! is_wp_error( $res ) && ( $res['response']['code'] == 200 ) ) {
-			$patcher = $res['body'];
-			goto put_content;
-		} else {
-			return;
-		}
+	$patcher = $download_file( 'https://raw.githubusercontent.com/mohamedhk2/php-patcher/v1.0.6/src/Patcher.php', $patcher_file );
+	if ( ! $patcher ) {
+		return;
 	}
 }
 if ( ! class_exists( 'Mohamedhk2\PhpPatcher\Patcher' ) ) {
